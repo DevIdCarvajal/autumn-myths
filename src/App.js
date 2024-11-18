@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+// imports
+import Header from './components/Header/Header'
 import './App.css';
 
-function App() {
+// logic
+const App = () => {
+  // initialization
+  // ...
+  let year = 2034
+
+  // renderization
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+
+      Hola Mundo en el { year > 2030 ? 'futuro' : 'pasado' }
+
+      <footer>FOOTER</footer>
     </div>
   );
 }
 
+// export
 export default App;
