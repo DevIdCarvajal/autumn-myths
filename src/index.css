@@ -19,3 +19,7 @@ code {
 .flexbox {
   display: flex;
 }
+
+.center {
+  text-align: center;
+}

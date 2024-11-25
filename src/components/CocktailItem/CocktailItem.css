@@ -1,7 +1,7 @@
-.Cocktail {
+.CocktailItem {
   text-align: center;
 }
 
-.Cocktail img {
+.CocktailItem img {
   width: 150px;
 }
