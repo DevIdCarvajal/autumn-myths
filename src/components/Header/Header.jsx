@@ -1,11 +1,11 @@
 import ThemeSelector from '../ThemeSelector/ThemeSelector'
 
-const Header = ({ title, theme }) => {
+const Header = ({ title }) => {
   return (
     <header>
       <h1>{ title }</h1>
 
-      <ThemeSelector theme={theme} />
+      <ThemeSelector />
     </header>
   )
 }

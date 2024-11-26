@@ -22,6 +22,7 @@ const CocktailList = ({ cocktails }) => {
             return (
               <CocktailItem
                 key={index}
+                id={cocktail.id}
                 cocktail={cocktail.cocktail}
                 image={cocktail.image}
               />
