@@ -4,11 +4,15 @@
  *************
 */
 import { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router'
 
 import AddCocktail from './components/AddCocktail/AddCocktail'
 import Header from './components/Header/Header'
+import Nav from './components/Nav/Nav'
 import CocktailList from './components/CocktailList/CocktailList'
 import Footer from './components/Footer/Footer'
+
+import { ThemeContext } from './contexts/Theme'
 
 import './App.css'
 
@@ -22,7 +26,7 @@ const App = () => {
   // -------------------- Inicialización de datos y estados -------------------
   
   const [userAge, setUserAge] = useState(0)
-  const [userLogged, setUserLogged] = useState(false)
+  const [userLogged, setUserLogged] = useState(true)
   const [cocktails, setCocktails] = useState([])
   const [lightTheme, setLightTheme] = useState(false)
 
@@ -46,7 +50,7 @@ const App = () => {
         if (response.ok) {
           return response.json()
         } else {
-          console.log('Respuesta de red OK pero respuesta de HTTP no OK');
+          console.log('Respuesta de red OK pero respuesta de HTTP no OK')
         }
       })
       .then((data) => {
@@ -59,7 +63,7 @@ const App = () => {
         }))
       })
       .catch((error) => {
-        console.log('Hubo un problema con la petición Fetch:' + error.message);
+        console.log('Hubo un problema con la petición Fetch:' + error.message)
       })
   }, [])
 
@@ -76,35 +80,43 @@ const App = () => {
   return (
     <div className={ `App ${lightTheme ? 'past' : 'future'}` }>
 
-      <Header
-        title="Cócteles Reactivos"
-        theme={{lightTheme, setLightTheme}}
-      />
+      <ThemeContext.Provider value={{lightTheme, setLightTheme}}>
+        
+        <Header title="Cócteles Reactivos" />
 
-      <div>
-      {
-        !userLogged
-        ?
-          <>
-            Tu edad: 
-            <input
-              type="number"
-              onChange={(event) => setUserAge(event.target.value)}
-              style={{width: '20px'}}
-            />
-            <button onClick={() => userAge > 17 && setUserLogged(true)}>Confirmar edad</button>
-          </>
-          :
-          <>
-            <h2>Nuestros cócteles</h2>
-            
-            <AddCocktail addCocktail={addCocktail} />
-            <CocktailList cocktails={cocktails} />
-          </>
-      }
-      </div>
-      
-      <Footer />
+        <div>
+        {
+          !userLogged
+          ?
+            <>
+              Tu edad: 
+              <input
+                type="number"
+                onChange={(event) => setUserAge(event.target.value)}
+                style={{width: '40px'}}
+              />
+              <button onClick={() => userAge > 17 && setUserLogged(true)}>
+                Confirmar edad
+              </button>
+            </>
+            :
+            <>
+              <h2>Nuestros cócteles</h2>
+
+              <Nav />
+
+              <Routes>
+                <Route path="/" element={ <AddCocktail addCocktail={addCocktail} /> } />
+                <Route path="list" element={ <CocktailList cocktails={cocktails} /> } />
+                {/* <Route path="list/:id" element={ <CocktailDetail cocktails={cocktails} /> } /> */}
+              </Routes>
+            </>
+        }
+        </div>
+
+        <Footer />
+      </ThemeContext.Provider>
+
     </div>
   )
 }
