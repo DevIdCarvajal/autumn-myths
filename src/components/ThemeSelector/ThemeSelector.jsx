@@ -1,12 +1,14 @@
 import { useContext } from 'react'
-import { ThemeContext } from '../../contexts/Theme'
 
 import lightIcon from './day.png'
 import darkIcon from './night.png'
 
+import { ThemeContext } from '../../contexts/Theme'
+
 const ThemeSelector = () => {
+
   const theme = useContext(ThemeContext)
-  
+
   return (
     <img
       src={theme.lightTheme ? darkIcon : lightIcon}

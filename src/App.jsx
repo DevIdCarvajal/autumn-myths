@@ -50,7 +50,7 @@ const App = () => {
         if (response.ok) {
           return response.json()
         } else {
-          console.log('Respuesta de red OK pero respuesta de HTTP no OK');
+          console.log('Respuesta de red OK pero respuesta de HTTP no OK')
         }
       })
       .then((data) => {
@@ -63,7 +63,7 @@ const App = () => {
         }))
       })
       .catch((error) => {
-        console.log('Hubo un problema con la petición Fetch:' + error.message);
+        console.log('Hubo un problema con la petición Fetch:' + error.message)
       })
   }, [])
 
@@ -79,39 +79,44 @@ const App = () => {
 
   return (
     <div className={ `App ${lightTheme ? 'past' : 'future'}` }>
+
       <ThemeContext.Provider value={{lightTheme, setLightTheme}}>
+        
         <Header title="Cócteles Reactivos" />
 
         <div>
         {
           !userLogged
           ?
-          <>
-            Tu edad: 
-            <input
-              type="number"
-              onChange={(event) => setUserAge(event.target.value)}
-              style={{width: '50px'}}
-            />
-            <button onClick={() => userAge > 17 && setUserLogged(true)}>Confirmar edad</button>
-          </>
-          :
-          <>
-            <h2>Nuestros cócteles</h2>
+            <>
+              Tu edad: 
+              <input
+                type="number"
+                onChange={(event) => setUserAge(event.target.value)}
+                style={{width: '40px'}}
+              />
+              <button onClick={() => userAge > 17 && setUserLogged(true)}>
+                Confirmar edad
+              </button>
+            </>
+            :
+            <>
+              <h2>Nuestros cócteles</h2>
 
-            <Nav />
+              <Nav />
 
-            <Routes>
-              <Route path="/" element={ <AddCocktail addCocktail={addCocktail} /> } />
-              <Route path="list" element={ <CocktailList cocktails={cocktails} /> } />
-              <Route path="list/:id" element={ <CocktailDetail cocktails={cocktails} /> } />
-            </Routes>
-          </>
+              <Routes>
+                <Route path="/" element={ <AddCocktail addCocktail={addCocktail} /> } />
+                <Route path="list" element={ <CocktailList cocktails={cocktails} /> } />
+                {/* <Route path="list/:id" element={ <CocktailDetail cocktails={cocktails} /> } /> */}
+              </Routes>
+            </>
         }
         </div>
-        
+
         <Footer />
       </ThemeContext.Provider>
+
     </div>
   )
 }
