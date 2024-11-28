@@ -1,10 +1,14 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
 import { MainTitle } from '../../styled/basics'
 
-const CocktailDetail = ({ cocktails }) => {
+const CocktailDetail = () => {
 
   const { id } = useParams()
   const navigate = useNavigate()
+
+  const cocktails = useSelector((state) => state.cocktail)
 
   const cocktail = cocktails.filter((cocktail) => {
     return cocktail.id === id

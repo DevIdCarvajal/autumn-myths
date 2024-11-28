@@ -1,9 +1,14 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
-const AddCocktail = ({ addCocktail }) => {
+import { add } from '../../features/cocktail/cocktailSlice'
+
+const AddCocktail = () => {
   const [cocktailName, setCocktailName] = useState('')
   const [cocktailImage, setCocktailImage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+
+  const dispatch = useDispatch()
   
   const validateCocktail = () => {
     if (
@@ -11,7 +16,11 @@ const AddCocktail = ({ addCocktail }) => {
       cocktailName.length > 4 &&
       cocktailImage
     ) {
-      addCocktail(cocktailName, cocktailImage)
+      dispatch(add({
+        cocktail: cocktailName,
+        image: cocktailImage
+      }))
+      
       setErrorMessage('')
     }
     else {
