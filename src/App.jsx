@@ -10,6 +10,7 @@ import AddCocktail from './components/AddCocktail/AddCocktail'
 import Header from './components/Header/Header'
 import Nav from './components/Nav/Nav'
 import CocktailList from './components/CocktailList/CocktailList'
+import CocktailDetail from './components/CocktailDetail/CocktailDetail'
 import Footer from './components/Footer/Footer'
 
 import { ThemeContext } from './contexts/Theme'
@@ -108,7 +109,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={ <AddCocktail addCocktail={addCocktail} /> } />
                 <Route path="list" element={ <CocktailList cocktails={cocktails} /> } />
-                {/* <Route path="list/:id" element={ <CocktailDetail cocktails={cocktails} /> } /> */}
+                <Route path="list/:id" element={ <CocktailDetail cocktails={cocktails} /> } />
               </Routes>
             </>
         }

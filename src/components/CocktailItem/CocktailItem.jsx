@@ -7,9 +7,13 @@ const CocktailItem = ({ id, cocktail, image }) => {
     <div className="CocktailItem">
       <h4>{ cocktail }</h4>
 
-      <img src={ image } alt="" />
-
-      <Link to={`/list/${id}`}>Ver más</Link>
+      <div>
+        <img src={ image } alt="" />
+      </div>
+      
+      <div>
+        <Link to={`/list/${id}`}>Ver más</Link>
+      </div>
     </div>
   )
 }
