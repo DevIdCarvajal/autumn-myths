@@ -10,11 +10,15 @@ import AddCocktail from './components/AddCocktail/AddCocktail'
 import Header from './components/Header/Header'
 import Nav from './components/Nav/Nav'
 import CocktailList from './components/CocktailList/CocktailList'
+import CocktailDetail from './components/CocktailDetail/CocktailDetail'
 import Footer from './components/Footer/Footer'
 
 import { ThemeContext } from './contexts/Theme'
 
 import './App.css'
+
+import { useDispatch } from 'react-redux'
+import { fetchCocktails } from './features/cocktail/cocktailSlice'
 
 /*
  *************************
@@ -27,44 +31,20 @@ const App = () => {
   
   const [userAge, setUserAge] = useState(0)
   const [userLogged, setUserLogged] = useState(true)
-  const [cocktails, setCocktails] = useState([])
   const [lightTheme, setLightTheme] = useState(true)
+
+  const dispatch = useDispatch()
 
   // ------------------- Declaración de funciones auxiliares ------------------
   
-  const addCocktail = (cocktailName, cocktailImage) => {
-    setCocktails([...cocktails, {
-      id: cocktails.length + 1,
-      cocktail: cocktailName,
-      image: cocktailImage
-    }])
-  }
+  // ...
   
   // ------------------- Manejo de asincronía (side effects) ------------------
 
   // Caso 1: Cuando se carga la primera vez
   //   Mounting (componentDidMount)
   useEffect(() => {
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic')
-      .then((response) => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          console.log('Respuesta de red OK pero respuesta de HTTP no OK')
-        }
-      })
-      .then((data) => {
-        setCocktails(data.drinks.slice(0, 5).map((item) => {
-          return {
-            id: item.idDrink,
-            cocktail: item.strDrink,
-            image: item.strDrinkThumb
-          }
-        }))
-      })
-      .catch((error) => {
-        console.log('Hubo un problema con la petición Fetch:' + error.message)
-      })
+    dispatch(fetchCocktails())
   }, [])
 
   // Caso 2: Va a dispararse para cualquier actualización (incluida la primera)
@@ -106,9 +86,9 @@ const App = () => {
               <Nav />
 
               <Routes>
-                <Route path="/" element={ <AddCocktail addCocktail={addCocktail} /> } />
-                <Route path="list" element={ <CocktailList cocktails={cocktails} /> } />
-                {/* <Route path="list/:id" element={ <CocktailDetail cocktails={cocktails} /> } /> */}
+                <Route path="/" element={ <AddCocktail /> } />
+                <Route path="list" element={ <CocktailList /> } />
+                <Route path="list/:id" element={ <CocktailDetail /> } />
               </Routes>
             </>
         }
