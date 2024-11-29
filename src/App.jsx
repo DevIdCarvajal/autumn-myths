@@ -19,9 +19,6 @@ import { fetchCocktails } from './features/cocktail/cocktailSlice'
 
 import './App.css'
 
-import { useDispatch } from 'react-redux'
-import { fetchCocktails } from './features/cocktail/cocktailSlice'
-
 /*
  *************************
  Definición del componente
