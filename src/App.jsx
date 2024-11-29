@@ -19,6 +19,9 @@ import { fetchCocktails } from './features/cocktail/cocktailSlice'
 
 import './App.css'
 
+import { useDispatch } from 'react-redux'
+import { fetchCocktails } from './features/cocktail/cocktailSlice'
+
 /*
  *************************
  Definición del componente
@@ -29,7 +32,7 @@ const App = () => {
   // -------------------- Inicialización de datos y estados -------------------
   
   const [userAge, setUserAge] = useState(0)
-  const [userLogged, setUserLogged] = useState(true)
+  const [userLogged, setUserLogged] = useState(false)
   const [lightTheme, setLightTheme] = useState(true)
 
   const dispatch = useDispatch()
